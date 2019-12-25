@@ -3,9 +3,9 @@ defmodule Scraper.MusicalChairs do
   @endpoint "jobs"
   @instruments ["clarinet", "flute", "oboe"]
 
-  def perform() do
+  def perform do
     @instruments
-    |> Enum.each(fn instrument -> spawn(fn -> do_sync(instrument) end) end)
+    |> Enum.each(fn instrument -> do_sync(instrument) end)
   end
 
   defp do_sync(instrument) do

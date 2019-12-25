@@ -1,21 +1,21 @@
 defmodule Periodical.RepoCase do
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Periodical.{Repo, RepoCase}
 
   using do
     quote do
-      alias Periodical.Repo
-
       import Ecto
       import Ecto.Query
-      import Periodical.RepoCase
+      import RepoCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Periodical.Repo)
+    :ok = Sandbox.checkout(Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Periodical.Repo, {:shared, self()})
+      Sandbox.mode(Repo, {:shared, self()})
     end
 
     :ok

@@ -27,7 +27,8 @@ defmodule Periodical.MixProject do
       {:postgrex, "~> 0.15.1"},
       {:ecto_sql, "~> 3.0"},
       {:httpoison, "~> 1.6"},
-      {:floki, "~> 0.23.0"}
+      {:floki, "~> 0.23.0"},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

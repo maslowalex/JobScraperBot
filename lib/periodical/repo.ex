@@ -3,7 +3,7 @@ defmodule Periodical.Repo do
     otp_app: :periodical,
     adapter: Ecto.Adapters.Postgres
 
-  alias Periodical.{Repo, Jobs}
+  alias Periodical.{Jobs, Repo}
   import Ecto.Query, only: [from: 2]
 
   def save_job(items, instrument) do
@@ -11,7 +11,7 @@ defmodule Periodical.Repo do
     |> Enum.each(fn row -> insert_row(row, instrument) end)
   end
 
-  def get_jobs_count() do
+  def get_jobs_count do
     query = from job in "jobs", select: count(job.id)
     Repo.one(query)
   end

@@ -1,15 +1,13 @@
 defmodule MusicalChairs do
-  use Periodical.RepoCase, async: true
+  use Periodical.RepoCase
 
   alias Scraper.MusicalChairs
-  alias Periodical.{Repo, Jobs}
+  alias Periodical.{Jobs, Repo}
 
-  describe "getTitlesAndLinks/1" do
-    setup  do
-      MusicalChairs.perform()
-    end
-
-    test "scrape and save positions into db" do
+  describe "perform" do
+    test "scrape musicalchairs site and save positions into db" do
+      assert Repo.get_jobs_count == 0
+      :ok = MusicalChairs.perform()
       assert Repo.get_jobs_count > 25
     end
   end
