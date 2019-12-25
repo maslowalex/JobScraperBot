@@ -1,8 +1,6 @@
 defmodule Periodical.Task do
   use GenServer
 
-  @instruments ["clarinet", "oboe", "flute"]
-
   def start_link(init_arg \\ []) do
     GenServer.start_link(__MODULE__, init_arg)
   end
@@ -14,8 +12,7 @@ defmodule Periodical.Task do
   end
 
   def handle_info(:work, state) do
-    @instruments |> Enum.each(&Periodical.getTitlesAndLinks/1)
-
+    Periodical.sync_jobs()
     # Start the timer again
     Process.send_after(self(), :work, 2 * 60 * 60 * 1000) # In 2 hours
 
