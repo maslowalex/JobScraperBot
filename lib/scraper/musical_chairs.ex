@@ -5,7 +5,7 @@ defmodule Scraper.MusicalChairs do
 
   def perform do
     @instruments
-    |> Enum.each(fn instrument -> do_sync(instrument) end)
+    |> Enum.each(fn instrument -> spawn(fn -> do_sync(instrument) end) end)
   end
 
   defp do_sync(instrument) do
