@@ -1,22 +1,26 @@
 defmodule Scraper.MusicalChairs do
   @url "https://www.musicalchairs.info"
   @endpoint "jobs"
-  @instruments ["clarinet", "flute", "oboe"]
+  @instruments ["clarinet", "flute", "oboe", "tuba"]
+
+  require Logger
 
   def perform do
     @instruments
-    |> Enum.each(fn instrument -> spawn(fn -> do_sync(instrument) end) end)
+    |> Enum.each(fn instrument -> Task.start(__MODULE__, :do_sync, [instrument]) end)
   end
 
-  defp do_sync(instrument) do
+  def do_sync(instrument) do
     request = HTTPoison.get!("#{@url}/#{instrument}/#{@endpoint}")
     case request.status_code do
       200 ->
         filter_banners(request.body)
         |> format_rows()
         |> Periodical.Repo.save_job(instrument)
-      _ ->
-        "Invalid instrument"
+      404 ->
+        Logger.error("Page for '#{instrument}' do not exists on this site. Check @instruments in #{__MODULE__}.")
+      code ->
+        Logger.warn("Fail to scrape page for #{instrument}. Response code: #{code}")
     end
   end
 
