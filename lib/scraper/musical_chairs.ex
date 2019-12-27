@@ -7,7 +7,8 @@ defmodule Scraper.MusicalChairs do
 
   def perform do
     @instruments
-    |> Enum.each(fn instrument -> Task.start(__MODULE__, :do_sync, [instrument]) end)
+    |> Task.async_stream(&do_sync/1)
+    |> Enum.to_list()
   end
 
   def do_sync(instrument) do

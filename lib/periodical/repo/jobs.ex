@@ -5,9 +5,9 @@ defmodule Periodical.Jobs do
   @required_fields [:link, :location, :position, :instrument]
 
   schema "jobs" do
-    field :location, :string
-    field :link, :string
-    field :position, :string
+    field :location,   :string
+    field :link,       :string
+    field :position,   :string
     field :instrument, :string
   end
 
