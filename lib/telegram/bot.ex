@@ -1,7 +1,6 @@
 defmodule Telegram.Bot do
   use ExGram.Bot, name: :periodical
 
-  require Logger
   alias Telegram.Bot.Command
 
   def bot(), do: :periodical

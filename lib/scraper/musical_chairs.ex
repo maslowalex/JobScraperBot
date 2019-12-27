@@ -18,7 +18,7 @@ defmodule Scraper.MusicalChairs do
       200 ->
         filter_banners(request.body)
         |> format_rows()
-        |> Periodical.Repo.save_job(instrument, @source)
+        |> Periodical.Jobs.save_job(instrument, @source)
       404 ->
         Logger.error("Page for '#{instrument}' do not exists on this site. Check @instruments in #{__MODULE__}.")
       code ->

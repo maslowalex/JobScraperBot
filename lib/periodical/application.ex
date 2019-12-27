@@ -10,7 +10,7 @@ defmodule Periodical.Application do
       Periodical.Repo,
       {Periodical.Task, []},
       ExGram,
-      {Telegram.Bot, [method: :polling, token: "870508772:AAGKPjvhY7mTYuIAw4mqbnI2nsqtbhS8mYY"]}
+      {Telegram.Bot, [method: :polling, token: "token"]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
