@@ -4,7 +4,7 @@ defmodule Telegram.Context do
       answers: [],
       bot_info: %ExGram.Model.User{
         first_name: "elixir_test",
-        id: 870508772,
+        id: 870_508_772,
         is_bot: true,
         language_code: nil,
         last_name: nil,
@@ -29,16 +29,16 @@ defmodule Telegram.Context do
         message: %{
           chat: %{
             first_name: "Anonymous",
-            id: 987654321,
+            id: 987_654_321,
             last_name: "Anno",
             type: "private",
             username: "anonymous_anno"
           },
-          date: 1577464529,
+          date: 1_577_464_529,
           entities: [%{length: 5, offset: 0, type: "bot_command"}],
           from: %{
             first_name: "Anonymous",
-            id: 987654321,
+            id: 987_654_321,
             is_bot: false,
             language_code: "en",
             last_name: "Anno",
@@ -50,7 +50,7 @@ defmodule Telegram.Context do
         poll: nil,
         pre_checkout_query: nil,
         shipping_query: nil,
-        update_id: 774595114
+        update_id: 774_595_114
       }
     }
   end

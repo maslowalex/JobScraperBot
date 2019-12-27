@@ -26,11 +26,11 @@ defmodule Periodical.User do
     Repo.insert(user)
   end
 
-  def get_all() do
+  def get_all do
     Repo.all(User)
   end
 
-  def count() do
+  def count do
     query = from u in "users", select: count(u.id)
 
     Repo.one(query)

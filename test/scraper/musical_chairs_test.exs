@@ -1,8 +1,8 @@
 defmodule MusicalChairsTest do
   use Periodical.RepoCase
 
-  alias Scraper.MusicalChairs
   alias Periodical.Jobs
+  alias Scraper.MusicalChairs
 
   describe "perform" do
     setup do

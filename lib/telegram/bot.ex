@@ -3,7 +3,7 @@ defmodule Telegram.Bot do
 
   alias Telegram.Bot.Command
 
-  def bot(), do: :periodical
+  def bot, do: :periodical
 
   def handle({:command, command, _msg}, context) do
     Command.reply_for(command, context)
