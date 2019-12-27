@@ -1,3 +1,5 @@
-# Periodical. Native Elixir periodical tasks test for fun.
+# Telegram bot for classical musicians that seeking for job.
 
-It scrapes https://www.musicalchairs.info/jobs and saves results into DB.
+Avaliable sources:
+  - https://www.musicalchairs.info/jobs
+

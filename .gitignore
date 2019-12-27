@@ -23,3 +23,4 @@ erl_crash.dump
 periodical-*.tar
 
 .elixir_ls
+token.development
