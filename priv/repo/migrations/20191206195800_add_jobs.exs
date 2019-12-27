@@ -3,10 +3,11 @@ defmodule Periodical.Repo.Migrations.AddJobs do
 
   def change do
     create table(:jobs) do
-      add :location, :string
-      add :link, :string
-      add :position, :string
-      add :instrument, :string
+      add :location,   :string, null: false
+      add :link,       :string, null: false
+      add :position,   :string, null: false
+      add :instrument, :string, null: false
+      add :source,     :string, null: false
     end
 
     create unique_index(:jobs, [:link])

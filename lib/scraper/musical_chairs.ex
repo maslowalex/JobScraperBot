@@ -2,6 +2,7 @@ defmodule Scraper.MusicalChairs do
   @url "https://www.musicalchairs.info"
   @endpoint "jobs"
   @instruments ["clarinet", "flute", "oboe", "tuba"]
+  @source "musicalchairs"
 
   require Logger
 
@@ -17,7 +18,7 @@ defmodule Scraper.MusicalChairs do
       200 ->
         filter_banners(request.body)
         |> format_rows()
-        |> Periodical.Repo.save_job(instrument)
+        |> Periodical.Repo.save_job(instrument, @source)
       404 ->
         Logger.error("Page for '#{instrument}' do not exists on this site. Check @instruments in #{__MODULE__}.")
       code ->

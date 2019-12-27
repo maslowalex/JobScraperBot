@@ -1,8 +1,8 @@
-defmodule MusicalChairs do
+defmodule MusicalChairsTest do
   use Periodical.RepoCase
 
   alias Scraper.MusicalChairs
-  alias Periodical.{Jobs, Repo}
+  alias Periodical.{Repo}
 
   describe "perform" do
     setup do

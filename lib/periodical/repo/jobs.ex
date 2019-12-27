@@ -2,13 +2,14 @@ defmodule Periodical.Jobs do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @required_fields [:link, :location, :position, :instrument]
+  @required_fields [:link, :location, :position, :instrument, :source]
 
   schema "jobs" do
     field :location,   :string
     field :link,       :string
     field :position,   :string
     field :instrument, :string
+    field :source,     :string
   end
 
   def changeset(%Periodical.Jobs{} = job, params \\ %{}) do

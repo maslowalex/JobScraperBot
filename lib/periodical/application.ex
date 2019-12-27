@@ -8,7 +8,9 @@ defmodule Periodical.Application do
   def start(_type, _args) do
     children = [
       Periodical.Repo,
-      {Periodical.Task, []}
+      {Periodical.Task, []},
+      ExGram,
+      {Telegram.Bot, [method: :polling, token: "870508772:AAGKPjvhY7mTYuIAw4mqbnI2nsqtbhS8mYY"]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
