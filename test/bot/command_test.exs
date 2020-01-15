@@ -22,7 +22,7 @@ defmodule CommandTest do
     end
 
     test "it responds with welcome message", context do
-      assert context[:text] == "Welcome to Musical jobs bot!"
+      assert context[:text] =~ "Welcome to Musical jobs bot!"
     end
 
     test "it saves users chat_id and name to DB, when called first time", context do

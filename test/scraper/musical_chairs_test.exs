@@ -6,7 +6,7 @@ defmodule MusicalChairsTest do
 
   describe "perform" do
     setup do
-      MusicalChairs.perform()
+      MusicalChairs.perform
     end
 
     test "scrape musicalchairs site and save positions into db" do
