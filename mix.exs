@@ -5,7 +5,7 @@ defmodule Periodical.MixProject do
     [
       app: :periodical,
       version: "0.1.0",
-      elixir: "~> 1.9",
+      elixir: "~> 1.8",
       start_permanent: false,
       deps: deps(),
       elixirc_paths: elixirc_paths(Mix.env()),
