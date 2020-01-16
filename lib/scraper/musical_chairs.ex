@@ -4,6 +4,7 @@ defmodule Scraper.MusicalChairs do
   @instruments ["clarinet", "flute", "oboe", "tuba"]
   @source "musicalchairs"
 
+  alias Periodical.Dates
   require Logger
 
   def perform do
@@ -37,26 +38,32 @@ defmodule Scraper.MusicalChairs do
     end)
   end
 
-  defp generate_row(element) do
-    [{find_name(element), find_position(element), find_link(element)}]
+  defp generate_row(el) do
+    [{name(el), position(el), link(el), deadline(el)}]
   end
 
-  defp find_name(item) do
+  defp name(item) do
     [{_, _, name}] = Floki.find(item, ".post_item_name")
 
     List.first(name)
   end
 
-  defp find_position(item) do
+  defp position(item) do
     [{_, _, position}] = Floki.find(item, ".post_item_info")
 
     List.first(position)
   end
 
-  defp find_link(item) do
+  defp link(item) do
     Floki.find(item, ".preview")
     |> Floki.find("a")
     |> Floki.attribute("href")
     |> List.first
+  end
+
+  defp deadline(item) do
+    [{_, _, [_, {_, _, [deadline_string]}]}] = Floki.find(item, ".post_item_closingdate")
+
+    Dates.convert_to_datetime(deadline_string)
   end
 end

@@ -2,7 +2,7 @@ defmodule Periodical.Jobs do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @required_fields [:link, :location, :position, :instrument, :source]
+  @required_fields [:link, :location, :position, :instrument, :source, :deadline]
 
   schema "jobs" do
     field :location,   :string
@@ -10,6 +10,7 @@ defmodule Periodical.Jobs do
     field :position,   :string
     field :instrument, :string
     field :source,     :string
+    field :deadline,   :date
   end
 
   def changeset(%Periodical.Jobs{} = job, params \\ %{}) do
@@ -36,19 +37,21 @@ defmodule Periodical.Jobs do
   def get_jobs_for(instrument) when instrument in @valid_instruments do
     query = from job in "jobs",
             where: job.instrument == ^instrument,
-            select:  [:link, :position, :location, :source]
+            select:  [:link, :position, :location, :source, :deadline]
 
     Repo.all(query)
   end
 
-  defp insert_row({name, position, link} = _item, instrument, source) do
+  defp insert_row({name, position, link, deadline} = _item, instrument, source) do
     params = %{
       location: name,
       link: link,
       position: position,
       instrument: instrument,
+      deadline: deadline,
       source: source
     }
+
     job = Jobs.changeset(%Jobs{}, params)
 
     Repo.insert(job)

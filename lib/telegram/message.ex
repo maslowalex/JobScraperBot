@@ -1,7 +1,7 @@
 defmodule Telegram.Bot.Message do
   use ExGram.Bot, name: :periodical
 
-  alias Periodical.Jobs
+  alias Periodical.{Jobs, Dates}
 
   @avaliable_instruments ["clarinet", "oboe", "flute", "tuba"]
 
@@ -12,8 +12,7 @@ defmodule Telegram.Bot.Message do
     answer(context, jobs_for, [disable_web_page_preview: true])
   end
 
-  def reply_for(text, context) do
-    IO.inspect text
+  def reply_for(_text, context) do
     answer(context, "Don't know what you mean.")
   end
 
@@ -24,6 +23,7 @@ defmodule Telegram.Bot.Message do
       Position: #{job[:position]}
       Location: #{job[:location]}
       Link: #{job[:link]}
+      Deadline: #{job[:deadline]} (#{Dates.difference_in_words(job[:deadline])})
       """
     end)
     |> Enum.join("\n")

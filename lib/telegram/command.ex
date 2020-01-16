@@ -12,6 +12,10 @@ defmodule Telegram.Bot.Command do
     answer(context, msg, [reply_markup: start_markup()])
   end
 
+  def reply_for(_, context) do
+    answer(context, "Don't know even what to say.")
+  end
+
   defp start_markup do
     %ExGram.Model.ReplyKeyboardMarkup{
       keyboard: [start_keys()]
@@ -22,10 +26,6 @@ defmodule Telegram.Bot.Command do
     Enum.map(["clarinet", "oboe", "flute", "tuba"], fn instrument ->
       %ExGram.Model.KeyboardButton{text: instrument}
     end)
-  end
-
-  def reply_for(_, context) do
-    answer(context, "Don't know even what to say.")
   end
 
   defp extract_user_from_context(context) do

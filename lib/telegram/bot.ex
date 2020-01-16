@@ -9,7 +9,7 @@ defmodule Telegram.Bot do
     Command.reply_for(command, context)
   end
 
-  def handle({:text, from, %{text: text}}, context) do
+  def handle({:text, _from, %{text: text}}, context) do
     Message.reply_for(text, context)
   end
 
