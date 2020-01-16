@@ -9,5 +9,7 @@ Avaliable sources:
 
 TODO:
  - Add more sources
- - Add logic for manage job deadlines
+ - ~~Add logic for manage job deadlines~~
  - Add telegram bot logic
+
+Please check out bot here https://t.me/elix_bot and don't hesitate to provide feedback.
