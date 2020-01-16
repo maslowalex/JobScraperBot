@@ -1,4 +1,4 @@
-import Config
+use Mix.Config
 
 config :periodical, Periodical.Repo,
   database: "periodical_repo",
