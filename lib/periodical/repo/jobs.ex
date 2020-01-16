@@ -42,6 +42,11 @@ defmodule Periodical.Jobs do
     Repo.all(query)
   end
 
+  def delete_all do
+    query = from "jobs", where: 1==1
+    Repo.delete_all(query)
+  end
+
   defp insert_row({name, position, link, deadline} = _item, instrument, source) do
     params = %{
       location: name,

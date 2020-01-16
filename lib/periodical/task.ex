@@ -12,9 +12,10 @@ defmodule Periodical.Task do
   end
 
   def handle_info(:work, state) do
+    Periodical.Jobs.delete_all()
     Periodical.sync_jobs()
     # Start the timer again
-    Process.send_after(self(), :work, 2 * 60 * 60 * 1000) # In 2 hours
+    Process.send_after(self(), :work, 24 * 60 * 60 * 1000) # In 24 hours
 
     {:noreply, state}
   end
