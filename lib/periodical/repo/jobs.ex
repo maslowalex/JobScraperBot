@@ -12,7 +12,6 @@ defmodule Periodical.Jobs do
     field :source,     :string
     field :deadline,   :date
   end
-
   def changeset(%Periodical.Jobs{} = job, params \\ %{}) do
     cast(job, params, @required_fields)
     |> validate_required(@required_fields)
