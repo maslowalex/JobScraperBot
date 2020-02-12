@@ -62,8 +62,22 @@ defmodule Scraper.MusicalChairs do
   end
 
   defp deadline(item) do
-    [{_, _, [_, {_, _, [deadline_string]}]}] = Floki.find(item, ".post_item_closingdate")
+    try do
+      [
+        {
+          _, _,
+          [
+            _,
+            {_, _, [deadline_string]}
+          ]
+        }
+      ] = Floki.find(item, ".post_item_closingdate")
 
-    Dates.convert_to_datetime(deadline_string)
+      Dates.convert_to_datetime(deadline_string)
+
+      rescue
+        MatchError ->
+          Dates.convert_to_datetime("n/a")
+    end
   end
 end
