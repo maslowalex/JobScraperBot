@@ -14,7 +14,6 @@ defmodule Telegram.Bot do
   end
 
   def handle({type, _, _}, context) do
-    IO.inspect type
     answer(context, "Not recognized")
   end
 end
