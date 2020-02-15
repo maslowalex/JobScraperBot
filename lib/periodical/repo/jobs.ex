@@ -16,6 +16,7 @@ defmodule Periodical.Jobs do
     cast(job, params, @required_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:link)
+    |> deadline_in_future
   end
 
   alias Periodical.{Jobs, Repo}
@@ -59,5 +60,15 @@ defmodule Periodical.Jobs do
     job = Jobs.changeset(%Jobs{}, params)
 
     Repo.insert(job)
+  end
+
+  defp deadline_in_future(changeset) do
+    deadline = get_field(changeset, :deadline)
+
+    if Date.compare(deadline, Date.utc_today()) == :gt do
+      changeset
+    else
+      add_error(changeset, :deadline, "cannot be less than today")
+    end
   end
 end

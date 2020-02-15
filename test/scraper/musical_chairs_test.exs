@@ -12,9 +12,13 @@ defmodule MusicalChairsTest do
     test "scrape musicalchairs site and save positions into db" do
       assert Jobs.get_jobs_count > 25
 
-      %{link: link, deadline: deadline} = Jobs.get_jobs_for("clarinet") |> List.first
+      cl_jobs = Jobs.get_jobs_for("clarinet")
+
+      %{link: link, deadline: deadline} = cl_jobs |> List.first
       assert link =~ "musicalchairs"
       assert deadline != nil
+
+      assert Enum.all?(cl_jobs, fn (job) -> Date.compare(job.deadline, Date.utc_today()) end) == true
     end
   end
 end
