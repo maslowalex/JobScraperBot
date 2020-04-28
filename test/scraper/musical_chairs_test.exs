@@ -12,7 +12,7 @@ defmodule MusicalChairsTest do
     test "scrape musicalchairs site and save positions into db" do
       assert Jobs.get_jobs_count > 25
 
-      cl_jobs = Jobs.get_jobs_for("clarinet")
+      cl_jobs = Jobs.get_jobs_for("oboe")
 
       %{link: link, deadline: deadline} = cl_jobs |> List.first
       assert link =~ "musicalchairs"

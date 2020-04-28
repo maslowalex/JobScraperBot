@@ -1,8 +1,8 @@
 defmodule Periodical.Task do
   use GenServer
 
-  def start_link(init_arg \\ []) do
-    GenServer.start_link(__MODULE__, init_arg)
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, :no_state)
   end
 
   @spec init(any) :: {:ok, any}
