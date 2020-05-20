@@ -18,7 +18,9 @@ defmodule Telegram.Bot.Command do
 
   defp start_markup do
     %ExGram.Model.ReplyKeyboardMarkup{
-      keyboard: [start_keys()]
+      keyboard: [start_keys()],
+      one_time_keyboard: true,
+      resize_keyboard: true
     }
   end
 

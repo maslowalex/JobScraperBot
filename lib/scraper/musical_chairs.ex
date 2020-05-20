@@ -1,4 +1,5 @@
 defmodule Scraper.MusicalChairs do
+  @behaviour Scraper.Basic
   @url "https://www.musicalchairs.info"
   @endpoint "jobs"
   @instruments ["clarinet", "flute", "oboe", "tuba"]
@@ -7,12 +8,14 @@ defmodule Scraper.MusicalChairs do
   alias Periodical.Dates
   require Logger
 
+  @impl Scraper.Basic
   def perform do
     @instruments
     |> Task.async_stream(&do_sync/1)
     |> Enum.to_list()
   end
 
+  @impl Scraper.Basic
   def do_sync(instrument) do
     request = HTTPoison.get!("#{@url}/#{instrument}/#{@endpoint}")
     case request.status_code do
@@ -20,10 +23,16 @@ defmodule Scraper.MusicalChairs do
         filter_banners(request.body)
         |> format_rows()
         |> Periodical.Jobs.save_job(instrument, @source)
+
+        {:ok, :success}
       404 ->
         Logger.error("Page for '#{instrument}' do not exists on this site. Check @instruments in #{__MODULE__}.")
+
+        {:error, 404}
       code ->
         Logger.warn("Fail to scrape page for #{instrument}. Response code: #{code}")
+
+        {:error, code}
     end
   end
 
